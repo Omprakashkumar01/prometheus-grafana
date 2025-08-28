@@ -11,61 +11,63 @@ In this blog, I’ll walk you through setting up Prometheus for collecting metri
 Prometheus is an open-source monitoring system that scrapes metrics from targets and stores them in a time-series database.
 
 Installation (Linux-based system):
-# Download Prometheus
+## Download Prometheus
 ```
 wget https://github.com/prometheus/prometheus/releases/download/v2.52.0/prometheus-2.52.0.linux-amd64.tar.gz
 ```
-# Extract files
+## Extract files
+```
 tar -xvf prometheus-2.52.0.linux-amd64.tar.gz
 cd prometheus-2.52.0.linux-amd64
-
-# Run Prometheus
+```
+## Run Prometheus
+```
 ./prometheus --config.file=prometheus.yml
-
+```
 
 By default, Prometheus runs on http://localhost:9090
-.
 
-Configuring Targets
+## Configuring Targets
 
 In prometheus.yml, add your target (for example, a Node.js app exposing /metrics):
-
+```
 scrape_configs:
   - job_name: 'node_app'
     static_configs:
       - targets: ['localhost:3000']
 
-
+```
 Now Prometheus will scrape metrics from your Node.js application. You can verify by checking the “Targets” page in the Prometheus UI.
 
-2. Creating a Grafana Dashboard
+## 2. Creating a Grafana Dashboard
 
 Grafana provides a powerful visualization layer on top of Prometheus.
 
 Installation:
-# On Debian/Ubuntu
+## On Debian/Ubuntu
+```
 sudo apt-get install -y apt-transport-https software-properties-common
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 sudo apt-get update
 sudo apt-get install grafana -y
-
-# Start Grafana
+```
+## Start Grafana
+```
 sudo systemctl start grafana-server
 sudo systemctl enable grafana-server
-
+```
 
 Grafana runs on http://localhost:3000
  (default user: admin / admin).
 
-Adding Prometheus as a Data Source
+## Adding Prometheus as a Data Source
 
-Go to Configuration → Data Sources → Add Data Source.
+1. Go to Configuration → Data Sources → Add Data Source.
+2. Choose Prometheus, and set the URL: http://localhost:9090.
 
-Choose Prometheus, and set the URL: http://localhost:9090.
+3. Save & Test.
 
-Save & Test.
-
-Creating a Dashboard
+## Creating a Dashboard
 
 Click Create → Dashboard.
 
