@@ -68,35 +68,32 @@ Grafana runs on http://localhost:3000
 3. Save & Test.
 
 ## Creating a Dashboard
-
-Click Create → Dashboard.
-
-Add a new panel.
-
-Use queries like:
-
+1. Click Create → Dashboard.
+2. Add a new panel.
+3. Use queries like:
+```
 node_cpu_seconds_total
 node_memory_Active_bytes
+```
 
-
-Customize the graph for CPU and memory usage.
+4. Customize the graph for CPU and memory usage.
 
 Within minutes, you’ll have a live dashboard tracking your system metrics.
 
-3. Configuring Alerts
+## 3. Configuring Alerts
 
 Prometheus includes an Alertmanager component that handles alerts based on rules you define.
 
-Step 1: Create an Alert Rule
+## Step 1: Create an Alert Rule
 
 In prometheus.yml, add:
-
+```
 rule_files:
   - "alert.rules.yml"
 
-
+```
 Then create a file alert.rules.yml:
-
+```
 groups:
   - name: example-alerts
     rules:
@@ -109,25 +106,17 @@ groups:
           summary: "High CPU usage detected"
           description: "CPU usage is above 80% for more than 2 minutes."
 
-
+```
 This alert triggers when CPU usage stays above 80% for 2 minutes.
 
-Step 2: Integrating with Grafana
+## Step 2: Integrating with Grafana
 
-In Grafana, go to Alerting → Alert Rules.
+1. In Grafana, go to Alerting → Alert Rules.
 
-Import the Prometheus alert rule.
+2. Import the Prometheus alert rule.
 
 Configure notification channels (email, Slack, PagerDuty, etc.).
 
 Now, whenever CPU usage exceeds the threshold, Grafana will display the alert and notify your configured channels.
 
-🔑 Key Takeaways
 
-Prometheus helps collect and store metrics from your services.
-
-Grafana makes metrics visual and insightful with dashboards.
-
-Alerts ensure you get notified before an incident escalates.
-
-Together, they form a powerful monitoring stack used widely across industries for observability and
